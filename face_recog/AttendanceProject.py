@@ -27,7 +27,13 @@ def findEncodings(images):
 
 def markAttendance(name):
     now = datetime.now()
-    dateString = now.strftime('%H:%M:%S')
+    date_string = now.strftime('%H:%M:%S')
+    api_endpoint = 'http://localhost:8080/api/patient/arrival'
+    attendance_data = { 'time': date_string, 'name': name }
+    res = requests.post(api_endpoint, data=attendance_data)
+    print(res.text)
+
+
 
 encodeListKnown = findEncodings(images)
 print('Encoding Complete')
@@ -56,9 +62,9 @@ while True:
             cv2.rectangle(img,(x1,y1),(x2,y2),(0,255,0),2)
             cv2.rectangle(img,(x1,y2-35),(x2,y2),(0,255,0),cv2.FILLED)
             cv2.putText(img,name,(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
-            # markAttendance(name)
-            print('match, waiting 5s')
-            cv2.waitKey(5000)
+            markAttendance(name)
+            print('match, waiting 30s')
+            cv2.waitKey(30000)
 
     cv2.imshow('Webcam',img)
     cv2.waitKey(1)

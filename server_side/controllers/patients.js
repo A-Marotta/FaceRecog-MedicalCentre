@@ -7,6 +7,7 @@ const Availability = require('../models/DoctorAvailability')
 
 const createGoogleCalendarAppointment = require('../service_objects/gcal_createAppointment')
 const deleteGoogleCalEvent = require('../service_objects/gcal_deleteAppointment')
+const sendEmail = require("../service_objects/nodemailer");
 
 const moment = require("moment")
 
@@ -148,6 +149,17 @@ router.delete("/appointment/:id", async (req,res) => {
         } else {
             res.status(403).json("You can only delete appointments that belong to you")
         }
+    } catch(err) {
+        console.log(err)
+        res.status(404).json(err)
+    }
+})
+
+// PATIENT ARRIVAL TO CLINIC 
+router.post("/arrival", async (req, res) => {
+    try{
+        await sendEmail(`Patient arrival: ${req.body.name}`, `Patient ${req.body.name} has arrived at ${req.body.time}, please notify the appropriate doctor.`)
+        res.status(200).json('success')
     } catch(err) {
         console.log(err)
         res.status(404).json(err)
