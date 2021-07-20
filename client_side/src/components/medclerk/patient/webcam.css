@@ -1,0 +1,50 @@
+.patient-registration-title {
+    text-align: center;
+    padding-bottom: 22px;
+}
+
+.ant-form { 
+    width: 60%;
+    margin: 0 auto;
+}
+
+.ant-form-item-label {
+    text-align: left;
+}
+
+.uppy-Root {
+    margin-top: 40px;
+}
+
+.uppy-Dashboard-inner {
+    margin: 0 auto;
+}
+
+.uppy-c-icon {
+    z-index: 99999;
+    color: red;
+    top: 10px;
+    right: -22px;
+    position: absolute;
+    height: 30px;
+}
+
+.uppy-Webcam-button {
+    position: absolute;
+    bottom: 5px;
+    right: -8px;
+    font-size: small;
+    z-index: 99999;
+}
+
+.uppy-Webcam-button svg{
+    height: 28px;
+    color: black;
+}
+
+.ant-btn-primary {
+    position: absolute;
+    right: 0;
+    margin-top: 12px;
+}
+

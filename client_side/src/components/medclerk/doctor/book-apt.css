@@ -1,0 +1,12 @@
+.book-apt-card {
+    margin-top: 40px;
+}
+
+.ant-card-head-title {
+    font-size: 20px;
+}
+
+.apt-wrapper {
+    display: flex;
+    gap: 40px;
+}

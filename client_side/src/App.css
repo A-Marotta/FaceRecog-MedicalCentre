@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+.App {
+  text-align: center;
+}
+
+body {
+  height: 100vh;
+}
+
+#root {
+  height: 100%;
+}
+
+.content {
+  width: calc(100% - 268px);
+  right: 0;
+  position: absolute;
+}
+

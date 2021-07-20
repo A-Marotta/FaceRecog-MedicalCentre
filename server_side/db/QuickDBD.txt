@@ -1,0 +1,43 @@
+Doctor
+-
+doctor_id PK SERIAL
+email VARCHAR(255)
+name VARCHAR(255)
+password_digest TEXT
+date_created DATE
+
+DoctorAvailability
+-
+id PK SERIAL
+datetime TIMESTAMP
+doctor_id int FK >- Doctor.doctor_id 
+
+Patient
+-
+id PK SERIAL
+email VARCHAR(255)
+password_digest TEXT
+date_created DATE
+patient_name VARCHAR(255)
+dob DATE
+mobile VARCHAR(55)
+address VARCHAR(255)
+
+PatientMedicalHistory
+-
+id PK SERIAL 
+allergy VARCHAR(255)
+notes VARCHAR(255)
+prescription VARCHAR(255)
+patient_id int FK >- Patient.id
+
+Appointments
+-
+id PK SERIAL
+availability_id int FK - DoctorAvailability.id
+patient_id int FK >- Patient.id
+doctor_id int FK - Doctor.doctor_id
+
+
+
+

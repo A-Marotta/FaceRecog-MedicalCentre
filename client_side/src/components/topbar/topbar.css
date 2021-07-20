@@ -1,0 +1,37 @@
+.topbar {
+    height: 6%;
+    width: calc(100% - 268px);
+    right: 0;
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1877F2;
+    color: white;
+    -webkit-box-shadow: 0px 1px 5px 2px gray; 
+    box-shadow: 0px 1px 5px 2px gray;
+    z-index: 999;
+}
+
+.topbar-left, .topbar-right {
+    padding: 0 30px;
+}
+
+.date {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.profile {
+    background-color: gray;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+
+.profile img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    border: 2px solid white;
+}

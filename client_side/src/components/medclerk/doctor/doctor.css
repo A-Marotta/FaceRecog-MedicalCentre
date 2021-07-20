@@ -1,0 +1,89 @@
+* { 
+    /* border: 1px solid red; */
+}
+
+.medclerk-doctor-wrapper {
+    margin-top: 6%;
+    padding: 20px;
+    height: 100%;
+}
+
+.all-doctors {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+}
+
+.doctor-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+    margin-bottom: 20px;
+}
+
+.doctor-name {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 300;
+    margin-top: 6px;
+    overflow-wrap: break-word;
+}
+
+.doctor-img {
+    border-radius: 50%;
+    height: 60%;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.doctor-email {
+    text-align: center;
+    padding-top: 20px;
+    overflow-wrap: break-word;
+}
+
+.card {
+    padding: 0 20px;
+    width: 70%;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;;
+    -webkit-box-shadow: 5px 5px 15px 5px #AAAAAA; 
+    box-shadow: 5px 5px 15px 5px #AAAAAA;
+}
+
+.card-head {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+
+.img-description {
+    font-size: 14px;
+    color: gray;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.card-body {
+    height: 400px;
+    width: 100%;
+    background-color: #b1b1b1;
+}
+
+.time {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}

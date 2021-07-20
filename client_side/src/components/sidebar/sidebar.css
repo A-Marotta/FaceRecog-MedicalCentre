@@ -1,0 +1,55 @@
+.pro-sidebar {
+    position: fixed;
+    left: 0;
+}
+
+.sidebar {
+    height: 100%;
+    color: white;
+}
+
+.sidebar-item {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+.main-item {
+    border-bottom: 1px solid #3a3a3a;
+    padding: 20px;
+}
+
+.sub-item {
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+.sidebar-title {
+    padding-top: 14px;
+    font-size: 26px;
+    text-align: center;
+    color: white;
+}
+
+.sidebar-links {
+    padding-left: 10px;
+    margin: 0;
+    list-style: none;
+    color: white;
+}
+
+.sidebar-footer {
+    padding: 20px;
+    margin: 0;
+    color: white;
+}
+
+.sidebar-footer:hover {
+    cursor: pointer;
+}
+
+.link-to {
+    text-decoration: none;
+    color: inherit;
+}
