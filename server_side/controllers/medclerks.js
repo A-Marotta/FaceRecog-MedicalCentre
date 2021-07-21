@@ -80,15 +80,10 @@ router.get("/reporting/listdoctorstoday", async (req, res) => {
 
 // List all doctors working on specific date
 router.post("/reporting/listdoctorsondate", async (req, res) => {
-    const newDate = new Date(req.body.available_date)
-    let followingDay = new Date(newDate.getTime() + (86400000 * 2))
-    let [actualDate, ...rest] = followingDay.toISOString().split('T')
-    actualDate += 'T00:00:00+10:00'
- 
     try {
         let doctorNames
 
-        DoctorAvailablity.find({ available_date: actualDate },{ "doctor_id": 1}).exec(function(err,results) {
+        DoctorAvailablity.find({ available_date: req.body.available_date },{ "doctor_id": 1}).exec(function(err,results) {
             var ids = results.map(function(el) { return el.doctor_id } )
 
             Doctor.find({ "_id": { "$in": ids }},{"doctor_name": 1},function(err,items) {

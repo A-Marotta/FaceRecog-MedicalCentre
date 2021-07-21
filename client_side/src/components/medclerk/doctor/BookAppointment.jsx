@@ -9,55 +9,69 @@ import 'antd/dist/antd.css'
 import './book-apt.css'
 
 export default function BookAppointment() {
-    const [date, setDate] = useState(new Date())
-    const [doctorsOnDate, setDoctorsOnDate] = useState([])
-    const [doctors, setDoctors] = useState([])
-
-    // const doctors = [
-    //     {
-    //         value: 'rick',
-    //         label: 'rick',
-    //         children: [
-    //             {
-    //               value: '19:30:00',
-    //               label: '19:30:00'
-    //             },
-    //             {
-    //               value: '19:45:00',
-    //               label: '19:45:00'
-    //             }
-    //         ],
-    //     }
-    // ]
+    const [selectedDate, setSelectedDate] = useState()
+    const [doctorList, setDoctorList] = useState([])
 
     function onChange(value) {
         console.log(value);
     }
 
+    const newDate = (dateValue) => {
+        setDoctorList()
 
-    const dateChange = (dateValue) => {
-        setDoctorsOnDate([])
-        setDate(dateValue)
-        let [calendarDate, ...rest] = date.toISOString().split('T')
+        const newDate = new Date(dateValue)
+        let followingDay = new Date(newDate.getTime() + (86400000 * 1))
+        let [calendarDate, ...rest] = followingDay.toISOString().split('T')
         calendarDate += 'T00:00:00+10:00'
 
+        setSelectedDate(calendarDate)
+        
         axios.post('http://localhost:8080/api/medclerk/reporting/listdoctorsondate', { available_date: calendarDate })
-        .then(res => {
-            setDoctorsOnDate(res.data.map(doctor => doctor.doctor_name))
-            console.log(doctorsOnDate)
-            let doctorsAvailable = []
-            doctorsOnDate.map(doctor => {
-                let doctorObject = {
-                    value: doctor,
-                    label: doctor
-                }
-                doctorsAvailable.push(doctorObject)
+            .then(res => {
+
+                let doctorsAvailable = []
+
+                res.data.forEach(doctor => {
+                    let doctorObject = {
+                        value: doctor._id,
+                        label: doctor.doctor_name
+                    }
+
+                    doctorsAvailable.push(doctorObject)
+                })
+
+                return doctorsAvailable
             })
-            setDoctors(doctorsAvailable)
-        })
-        .catch(err => {
-            console.log(err)
-        })
+            .then(res => {
+                const [newDate, ...rest] = calendarDate.split('T')
+                let docArray = []
+                res.forEach(available_doctor => {
+                    axios.post('http://localhost:8080/api/patient/checkavailapt', { 
+                        start_time: newDate, 
+                        doctor_id: available_doctor.value 
+                    })
+                    .then(res => {
+                        let timeSlots = []
+
+                        res.data.forEach(timeslot => {
+                            timeslot = timeslot.split('T')[1]
+                            timeslot = timeslot.split('+')[0]
+
+                            let timeObject = {
+                                value: timeslot,
+                                label: timeslot
+                            }
+
+                            timeSlots.push(timeObject)
+                        })
+                        available_doctor.children = timeSlots
+                        docArray.push(available_doctor)
+                    })
+                })
+                setTimeout(function () {
+                    setDoctorList(docArray.map(doctor => doctor))
+                }, 1000);
+            })
     }
 
     return (
@@ -65,12 +79,12 @@ export default function BookAppointment() {
             <div className="apt-wrapper">
                 <div className="apt-left">
                     <Calendar
-                    onChange={dateChange}
-                    value={date}
+                    onChange={newDate}
+                    value={new Date()}
                     />
                 </div>
                 <div className="apt-right">
-                    <Cascader options={doctors} onChange={onChange} placeholder="Please select" />
+                    <Cascader options={doctorList} onChange={onChange} placeholder="Please select" />
                 </div>
             </div>
         </Card>

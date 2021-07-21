@@ -47,7 +47,7 @@ router.get('/checkavail', async (req,res) => {
 })
 
 // PATIENT CHECK DOCTOR AVAILABLE APPOINTMENTS FOR SPECIFIC DAY
-router.get('/checkavailapt', async (req,res) => {
+router.post('/checkavailapt', async (req,res) => {
     try {
         const searchDate = new RegExp(req.body.start_time, "g")
 
