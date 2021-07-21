@@ -51,6 +51,8 @@ export default function BookAppointment() {
         )
         .then(res => {
             if(res.status === 200) {
+
+                // why the fuck am I doing this
                 setPatientEmail(res.data)
             }
             setPatientLoader(false)

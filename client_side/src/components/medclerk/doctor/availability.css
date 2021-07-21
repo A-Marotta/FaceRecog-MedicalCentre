@@ -1,3 +1,28 @@
 .add-avail-card {
     margin-top: 40px;
+    height: 350px;
+}
+
+.doctor-date-wrapper {
+    padding-left: 5%;
+}
+
+.input-doc-date-avail {
+    margin: 0 4px;
+}
+
+.submit-doc-date-avail {
+    left: 7%;
+}
+
+.operation-status {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    padding-left: 14%;
+}
+
+.operation-indicator {
+    position: relative;
+    top: 6px;
 }

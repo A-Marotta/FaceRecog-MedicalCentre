@@ -51,4 +51,14 @@ router.delete("/:id", async(req, res) => {
     }
 })
 
+// DOCTOR CHECK EXIST
+router.post("/validaccount", async (req, res) => {
+    try{
+        const doctor = await Doctor.findOne({email:req.body.email}, { "_id": 1, "email": 1, "doctor_name": 1})
+        res.status(200).json(doctor)
+    } catch(err) {
+        res.status(404).json(err)
+    }
+})
+
 module.exports = router
