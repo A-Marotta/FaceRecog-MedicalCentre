@@ -113,7 +113,6 @@ router.post("/appointment", async (req,res) => {
                 const newAppointment = new Appointment({
                     doctor_id: doctorID,
                     patient_id: patientID,
-                    availability_id: req.body.availability_id,
                     start_time: startTime,
                     end_time: endTime,
                     calendar_id: eventCreated.event_id
@@ -149,6 +148,17 @@ router.delete("/appointment/:id", async (req,res) => {
         } else {
             res.status(403).json("You can only delete appointments that belong to you")
         }
+    } catch(err) {
+        console.log(err)
+        res.status(404).json(err)
+    }
+})
+
+// PATIENT CHECK EXIST
+router.post("/validaccount", async (req, res) => {
+    try{
+        const patient = await Patient.findOne({email:req.body.email}, { "_id": 1, "email": 1, "patient_name": 1})
+        res.status(200).json(patient)
     } catch(err) {
         console.log(err)
         res.status(404).json(err)

@@ -8,5 +8,40 @@
 
 .apt-wrapper {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 40px;
 }
+
+.apt-right {
+    width: 60%;
+    height: 325px;
+}
+
+.ant-cascader-picker {
+    margin-left: 5%;
+    width: 300px;
+}
+
+.divider-padding-top {
+    padding-top: 18px;
+}
+
+.ant-input, .ant-cascader-input {
+    width: 40%;
+}
+
+.ant-input-wrapper, .ant-input-group {
+    margin-left: 5%;
+    width: 300px;
+}
+
+.ant-input, .ant-input-borderless {
+    padding-left: 5%;
+    width: 40%;
+}
+
+.ant-btn-primary {
+    right:8.5% !important;
+}
+

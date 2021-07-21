@@ -90,7 +90,7 @@ export default class DragAndDropFileUploader extends React.Component {
                           },
                       ]}
                   >
-                      <Input />
+                      <Input id="input-width"/>
                   </Form.Item>
       
                   <Form.Item
@@ -103,7 +103,7 @@ export default class DragAndDropFileUploader extends React.Component {
                           },
                       ]}
                   >
-                      <Input />
+                      <Input id="input-width"/>
                   </Form.Item>
       
                   <Form.Item
@@ -116,7 +116,7 @@ export default class DragAndDropFileUploader extends React.Component {
                           },
                       ]}
                   >
-                      <Input.Password />
+                      <Input.Password id="input-width"/>
                   </Form.Item>
       
                   <Form.Item
@@ -128,7 +128,7 @@ export default class DragAndDropFileUploader extends React.Component {
                           },
                       ]}
                   >
-                      <Input />
+                      <Input id="input-width"/>
                   </Form.Item>
       
                   <Dashboard uppy={this.uppy} target={document.body} plugins={["Webcam"]} trigger="#dashboard" />

@@ -3,3 +3,16 @@
     padding: 20px;
     height: 100%;
 }
+
+.ant-input-affix-wrapper, .ant-input-password {
+    justify-content: flex-end !important;
+}
+
+#nest-messages_user_password{
+    width: 80%;
+    padding-left: 8%;
+}
+
+#input-width, .ant-input-password {
+    width: 80% !important;
+}

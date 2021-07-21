@@ -10,8 +10,7 @@ const AppointmentSchema = new mongoose.Schema({
         required: true
     },
     availability_id: {
-        type: String,
-        required: true
+        type: String
     },
     start_time: {
         type: String,
