@@ -10,47 +10,50 @@ import './book-apt.css'
 
 export default function BookAppointment() {
     const [date, setDate] = useState(new Date())
+    const [doctorsOnDate, setDoctorsOnDate] = useState([])
+    const [doctors, setDoctors] = useState([])
 
-    const doctors = [
-        {
-            value: 'rick',
-            label: 'rick',
-            children: [
-                {
-                  value: '19:30:00',
-                  label: '19:30:00'
-                },
-                {
-                  value: '19:45:00',
-                  label: '19:45:00'
-                }
-            ],
-        }
-    ]
+    // const doctors = [
+    //     {
+    //         value: 'rick',
+    //         label: 'rick',
+    //         children: [
+    //             {
+    //               value: '19:30:00',
+    //               label: '19:30:00'
+    //             },
+    //             {
+    //               value: '19:45:00',
+    //               label: '19:45:00'
+    //             }
+    //         ],
+    //     }
+    // ]
 
     function onChange(value) {
         console.log(value);
     }
 
-    useEffect(() => {
-        dateChange(date)
-    }, [date])
 
     const dateChange = (dateValue) => {
+        setDoctorsOnDate([])
         setDate(dateValue)
         let [calendarDate, ...rest] = date.toISOString().split('T')
         calendarDate += 'T00:00:00+10:00'
-        console.log(calendarDate)
 
-        axios({ 
-            method: "post",
-            data: {
-                available_date: calendarDate
-            },
-            url: 'http://localhost:8080/api/medclerk/reporting/listdoctorsondate'
-        })
+        axios.post('http://localhost:8080/api/medclerk/reporting/listdoctorsondate', { available_date: calendarDate })
         .then(res => {
-            console.log(res)
+            setDoctorsOnDate(res.data.map(doctor => doctor.doctor_name))
+            console.log(doctorsOnDate)
+            let doctorsAvailable = []
+            doctorsOnDate.map(doctor => {
+                let doctorObject = {
+                    value: doctor,
+                    label: doctor
+                }
+                doctorsAvailable.push(doctorObject)
+            })
+            setDoctors(doctorsAvailable)
         })
         .catch(err => {
             console.log(err)
@@ -62,7 +65,7 @@ export default function BookAppointment() {
             <div className="apt-wrapper">
                 <div className="apt-left">
                     <Calendar
-                    onChange={setDate}
+                    onChange={dateChange}
                     value={date}
                     />
                 </div>

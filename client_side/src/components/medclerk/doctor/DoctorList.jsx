@@ -55,8 +55,9 @@ class DoctorList extends React.Component {
             {this.state.availableDoctors.map(doctor => 
                 <div key={doctor._id}className="card">
                     <h4 className="doctor-name">{doctor.doctor_name}</h4>
-                    <img className="doctor-img" src="https://www.pngitem.com/pimgs/m/530-5301192_rickipedia-rick-and-morty-rick-standing-hd-png.png" alt="Avatar"></img>
-                    <div className="time">
+                    <img className="doctor-img" src={doctor.doctor_img} alt="Avatar"></img>
+                    <p className="doctor-email">{doctor.email}</p> 
+                    {/* <div className="time">
                         <div className="time-left">
                             {doctor.start_time
                                 .split('T')[1]
@@ -69,7 +70,7 @@ class DoctorList extends React.Component {
                                 .slice(0, -6)
                             }
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             )}
         </div>

@@ -50,7 +50,7 @@
     height: 350px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;;
+    /* justify-content: space-between;; */
     -webkit-box-shadow: 5px 5px 15px 5px #AAAAAA; 
     box-shadow: 5px 5px 15px 5px #AAAAAA;
 }

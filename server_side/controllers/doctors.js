@@ -12,7 +12,7 @@ router.post("/availability", async (req, res) => {
     const start = req.body.start_time
     const end = req.body.end_time
     let [date_of_work, time] = start.split('T')
-    date_of_work += 'T:00:00:00+10:00'
+    date_of_work += 'T00:00:00+10:00'
     
     try {
          const newAvailability = new DoctorAvailablity({

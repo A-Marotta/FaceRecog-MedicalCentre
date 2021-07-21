@@ -59,11 +59,19 @@ router.get("/reporting/listdoctorstoday", async (req, res) => {
     currentDate += 'T00:00:00+10:00'
 
     try {
-        const doctorsToday = await DoctorAvailablity.find({
-            available_date: currentDate
-        })
+        let doctorNames
 
-        res.status(200).json(doctorsToday)
+        DoctorAvailablity.find({ available_date: currentDate }).exec(function(err,results) {
+            var ids = results.map(function(el) { return el.doctor_id } )
+
+            Doctor.find({ "_id": { "$in": ids }},function(err,items) {
+                doctorNames = items
+            })
+        })
+        
+        setTimeout(function () {
+            res.status(200).json(doctorNames)
+        }, 2000);
     } catch(err) {
         console.log(err)
         res.status(404).json(err)
@@ -72,26 +80,26 @@ router.get("/reporting/listdoctorstoday", async (req, res) => {
 
 // List all doctors working on specific date
 router.post("/reporting/listdoctorsondate", async (req, res) => {
-    // const doctorsWorking = DoctorAvailablity.aggregate([
-    //     {
-    //         $lookup: {
-    //             from: "doctors",
-    //             localField: "_id",
-    //             foreignField: "doctor_id",
-    //             as: "available_doctors"
-    //         }
-    //     }
-    // ])
-
+    const newDate = new Date(req.body.available_date)
+    let followingDay = new Date(newDate.getTime() + (86400000 * 2))
+    let [actualDate, ...rest] = followingDay.toISOString().split('T')
+    actualDate += 'T00:00:00+10:00'
+ 
     try {
-        const doctorsWorking = await DoctorAvailablity.find({
-            available_date: req.body.available_date
-        }).populate('doctor_info')
-        // const doctorInfo = await Doctor.find({ 
-        //     _id: '60f0fa0d851191a3c740d4d6'
-        // })
-        // console.log()
-    res.status(200).json(doctorsWorking)
+        let doctorNames
+
+        DoctorAvailablity.find({ available_date: actualDate },{ "doctor_id": 1}).exec(function(err,results) {
+            var ids = results.map(function(el) { return el.doctor_id } )
+
+            Doctor.find({ "_id": { "$in": ids }},{"doctor_name": 1},function(err,items) {
+                doctorNames = items
+            })
+        })
+        
+        setTimeout(function () {
+            console.log(doctorNames)
+            res.status(200).json(doctorNames)
+        }, 2000);
     } catch(err) {
         console.log(err)
         res.status(404).json(err)
@@ -99,14 +107,3 @@ router.post("/reporting/listdoctorsondate", async (req, res) => {
 })
 
 module.exports = router
-
-// {
-//     "_id": "60f2e1100efc2336f0907779",
-//     "doctor_id": "60f0fa0d851191a3c740d4d6",
-//     "available_date": "2021-07-19T00:00:00+10:00",
-//     "start_time": "2021-07-19T16:30:00+10:00",
-//     "end_time": "2021-07-19T22:30:00+10:00",
-//     "createdAt": "2021-07-17T13:54:24.597Z",
-//     "updatedAt": "2021-07-17T13:54:24.597Z",
-//     "__v": 0
-// }
