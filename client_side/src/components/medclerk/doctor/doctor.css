@@ -36,6 +36,7 @@
     height: 60%;
     width: 80%;
     margin: 0 auto;
+    object-fit: cover;
 }
 
 .doctor-email {
@@ -47,6 +48,17 @@
 .card {
     padding: 0 20px;
     width: 70%;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between;; */
+    -webkit-box-shadow: 5px 5px 15px 5px #AAAAAA; 
+    box-shadow: 5px 5px 15px 5px #AAAAAA;
+}
+
+.card-today {
+    padding: 0 20px;
+    width: 30%;
     height: 350px;
     display: flex;
     flex-direction: column;

@@ -40,6 +40,7 @@ const patientsRoute = require("./controllers/patients.js")
 const doctorRoute = require("./controllers/doctors.js")
 const medclerkRoute = require("./controllers/medclerks.js")
 
+const statisticRoute = require("./controllers/statistics.js")
 
 app.use("/api/auth", authPatientRoute)
 app.use("/api/auth", authDoctorRoute)
@@ -48,6 +49,8 @@ app.use("/api/auth", authMedclerkRoute)
 app.use("/api/patient", patientsRoute)
 app.use("/api/doctor", doctorRoute)
 app.use("/api/medclerk", medclerkRoute)
+
+app.use("/api/statistic", statisticRoute)
 
 //--------------------------------------- END OF ROUTES ---------------------------------------
 

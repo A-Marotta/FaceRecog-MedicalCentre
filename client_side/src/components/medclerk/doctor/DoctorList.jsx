@@ -53,24 +53,10 @@ class DoctorList extends React.Component {
         } else {
             return <div className="doctor-wrapper"> 
             {this.state.availableDoctors.map(doctor => 
-                <div key={doctor._id}className="card">
+                <div key={doctor._id}className="card-today">
                     <h4 className="doctor-name">{doctor.doctor_name}</h4>
                     <img className="doctor-img" src={doctor.doctor_img} alt="Avatar"></img>
                     <p className="doctor-email">{doctor.email}</p> 
-                    {/* <div className="time">
-                        <div className="time-left">
-                            {doctor.start_time
-                                .split('T')[1]
-                                .slice(0, -6)
-                            }
-                        </div>
-                        <div className="time-right">
-                            {doctor.end_time
-                                .split('T')[1]
-                                .slice(0, -6)
-                            }
-                        </div>
-                    </div> */}
                 </div>
             )}
         </div>

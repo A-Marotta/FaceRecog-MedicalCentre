@@ -1,0 +1,16 @@
+.dashboard-wrapper {
+    margin-top: 100px;
+    margin-left: 40px;
+}
+
+.dashboard-user {
+    font-weight: 300;
+}
+
+.top-stats {
+    display: flex;
+    width: 65%;
+    justify-content: space-around;
+    margin: 0 auto;
+    margin-top: 24px;
+}
