@@ -29,7 +29,7 @@ export default function BookAppointment() {
     function handlePatientSearch(e) {
         setPatientLoader(true)
 
-        axios.post('http://localhost:8080/api/patient/validaccount', { email: e })
+        axios.post('/api/patient/validaccount', { email: e })
             .then(res => {
                 if(res.status === 200) {
                     setPatientEmail(res.data)
@@ -42,7 +42,7 @@ export default function BookAppointment() {
         let [modifiedDate, ...rest] = originalDate.split('T')
         modifiedDate = `${modifiedDate}T${selectedAptTime[1]}+10:00`
 
-        axios.post('http://localhost:8080/api/patient/appointment', 
+        axios.post('/api/patient/appointment', 
             { 
                 doctor_id: selectedAptTime[0],
                 patient_id: patientEmail._id,
@@ -51,8 +51,6 @@ export default function BookAppointment() {
         )
         .then(res => {
             if(res.status === 200) {
-
-                // why the fuck am I doing this
                 setPatientEmail(res.data)
             }
             setPatientLoader(false)
@@ -66,10 +64,10 @@ export default function BookAppointment() {
         let followingDay = new Date(newDate.getTime() + (86400000 * 1))
         let [calendarDate, ...rest] = followingDay.toISOString().split('T')
         calendarDate += 'T00:00:00+10:00'
-
+        console.log(calendarDate)
         setSelectedDate(calendarDate)
         
-        axios.post('http://localhost:8080/api/medclerk/reporting/listdoctorsondate', { available_date: calendarDate })
+        axios.post('/api/medclerk/reporting/listdoctorsondate', { available_date: calendarDate })
             .then(res => {
 
                 let doctorsAvailable = []
@@ -90,7 +88,7 @@ export default function BookAppointment() {
                 const [newDate, ...rest] = calendarDate.split('T')
                 let docArray = []
                 res.forEach(available_doctor => {
-                    axios.post('http://localhost:8080/api/patient/checkavailapt', { 
+                    axios.post('/api/patient/checkavailapt', { 
                         start_time: newDate, 
                         doctor_id: available_doctor.value 
                     })

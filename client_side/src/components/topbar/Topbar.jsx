@@ -11,14 +11,16 @@ function getToday() {
 }
 
 export default function Topbar() {
+    const user = JSON.parse(localStorage.getItem('userInfo')).data.name
+
     return (
         <div className="topbar">
             <div className="topbar-left">
-                <span className="date">{getToday()}</span>
+                <span className="welcome-user">Welcome, <span className="user_name">{user}.</span></span>
             </div>
             <div className="topbar-right">
-                <div className="profile">
-                    <img src="http://placekitten.com/200/300" alt="" />
+                <div className="date">
+                    {getToday()}
                 </div>
             </div>
         </div>

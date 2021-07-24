@@ -12,8 +12,14 @@ const sendEmail = require("../service_objects/nodemailer");
 const moment = require("moment")
 
 function intervals(startTime, endTime) {
+    console.log(startTime)
+    console.log(endTime)
+
     var start = moment(startTime);
     var end = moment(endTime);
+
+    console.log(start)
+    console.log(end)
 
     start.minutes(Math.ceil(start.minutes() / 15) * 15);
 
@@ -62,15 +68,21 @@ router.post('/checkavailapt', async (req,res) => {
             doctor_id: req.body.doctor_id
         })
 
+        console.log(`starting time ${available.start_time}`)
+        console.log(`finishing time ${available.end_time}`)
+
         // Push to array the exising bookings that can no longer be used
         const appointmentTimes = []
         appointments.map(appointment => appointmentTimes.push(appointment.start_time))
+        console.log(`times unavailable because already booked: ${appointmentTimes}`)
 
         // Using the start and end times, how many booking spots are there to choose from?
         const appointmentIntervals = intervals(available.start_time, available.end_time)
+        console.log(`The 15 minute intervals after running function to breakdown ${appointmentIntervals}`)
 
         // Return the remaining available booking times
         const availableSlots = appointmentIntervals.filter(interval => appointmentTimes.indexOf(interval) === -1 )
+        console.log(`The remaining booking time available to book ${availableSlots}`)
         
         res.status(200).json(availableSlots)
     } catch(err){

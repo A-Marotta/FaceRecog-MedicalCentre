@@ -1,8 +1,7 @@
 // Imports
 const express = require('express')
 const app = express() 
-const port = 8080
-const domain = `http://localhost:${port}`
+const port = process.env.PORT || 8080
 
 const dotenv = require('dotenv') // separate the vulnerable data e.g. secret keys
 dotenv.config()
@@ -21,7 +20,7 @@ const db = require ('./db/db.js')
 // Middleware
 app.use(logger)
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: 'https://tranquil-springs-32742.herokuapp.com/',
     credentials: true
 })) 
 app.use(express.static('public'))
@@ -57,3 +56,12 @@ app.use("/api/statistic", statisticRoute)
 app.listen(port, () => {
     console.log(`magic happening at port: ${port}`)
 })
+
+if (process.env.NODE_ENV === 'production') {
+    const path = require('path')
+    app.use(express.static(path.join(__dirname, 'build')));
+  
+    app.get('/*', (req, res) => {
+      res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    });
+  }

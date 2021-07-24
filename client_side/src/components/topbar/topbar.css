@@ -17,21 +17,16 @@
     padding: 0 30px;
 }
 
+.welcome-user {
+    font-weight: 700;
+    font-size: 26px;
+}
+
+.user_name {
+    font-size: 14px;
+}
+
 .date {
     font-weight: 700;
-    font-size: 20px;
-}
-
-.profile {
-    background-color: gray;
-    border-radius: 50%;
-    height: 50px;
-    width: 50px;
-}
-
-.profile img {
-    height: 100%;
-    width: 100%;
-    border-radius: 50%;
-    border: 2px solid white;
+    font-size: 20px; 
 }

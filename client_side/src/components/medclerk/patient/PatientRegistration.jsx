@@ -44,7 +44,7 @@ export default class DragAndDropFileUploader extends React.Component {
     this.uppy = Uppy({ id: 'uppy1', autoProceed: true, debug: true })
     .use(Webcam)
     .use(XHRUpload, {
-        endpoint: 'http://localhost:8080/api/auth/patient/uploadimage',
+        endpoint: '/api/auth/patient/uploadimage',
         fieldName: 'photo',
         formData: true,
     })
@@ -60,7 +60,7 @@ export default class DragAndDropFileUploader extends React.Component {
         dob: values.user.dob
       },
       withCredentials: true,
-      url: 'http://localhost:8080/api/auth/patient/register'
+      url: '/api/auth/patient/register'
     })
     }
 

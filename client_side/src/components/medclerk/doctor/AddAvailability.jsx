@@ -32,7 +32,7 @@ export default function AddAvailability() {
     function handleDoctorSearch(e) {
         setDoctorLoader(true)
 
-        axios.post('http://localhost:8080/api/doctor/validaccount', { email: e })
+        axios.post('/api/doctor/validaccount', { email: e })
             .then(res => {
                 if(res.status === 200) {
                     console.log(res.data)
@@ -43,11 +43,8 @@ export default function AddAvailability() {
     }
 
     function handleWorkingDate(e) {
-        let date = e.toISOString()
-        const newDate = new Date(date)
-        let lessOneDay = new Date(newDate.getTime() + 86400000)
-        let [calendarDate, ...rest] = lessOneDay.toISOString().split('T')
-        setWorkingDate(calendarDate)
+        let [date, ...rest] = e.toISOString().split('T')
+        setWorkingDate(date)
     }
 
     function handleStartTimeChange(e) {
@@ -70,7 +67,7 @@ export default function AddAvailability() {
         const newStartTime = `${workingDate}T${startTime}+10:00`
         const newFinishTime = `${workingDate}T${finishTime}+10:00`
 
-        axios.post('http://localhost:8080/api/doctor/availability', 
+        axios.post('/api/doctor/availability', 
         { 
             doctor_id: doctor_id,
             start_time: newStartTime,

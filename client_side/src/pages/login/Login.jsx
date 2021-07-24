@@ -22,7 +22,7 @@ export default function Login() {
                 password_digest: loginPassword 
             },
             withCredentials: true,
-            url: 'http://localhost:8080/api/auth/medclerk/login'
+            url: '/api/auth/medclerk/login'
         })
         .then(res => {
             setLoading(false)

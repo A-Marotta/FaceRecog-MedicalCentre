@@ -24,11 +24,11 @@ class DoctorList extends React.Component {
 
     componentDidMount() {
         axios.all([
-            axios.get(`http://localhost:8080/api/medclerk/reporting/listdoctors`)
+            axios.get(`/api/medclerk/reporting/listdoctors`)
                 .then(res => {
                     this.setState({ allDoctors: res.data })
             }),
-            axios.get(`http://localhost:8080/api/medclerk/reporting/listdoctorstoday`)
+            axios.get(`/api/medclerk/reporting/listdoctorstoday`)
                 .then(res => {
                     this.setState({ availableDoctors: res.data })
             })
